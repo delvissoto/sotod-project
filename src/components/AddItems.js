@@ -2,21 +2,25 @@ import React, { useState } from 'react'
 
 
 const AddItems = () => {
+  const [item, setItem] = useState({})
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress]= useState('')
 
-  const handleChange = (e)  =>{
-
-  }
+  
 
 
 
   const handleSubmit = (e) =>{
-    e.preventDefaul()
-    
+    e.preventDefault();
 
+    setItem(values =>({...values, "user_name": user, "password": password, "email": email }));
+    // console.log({"user_id": user, "password": password, "email": email})
+    console.log(item)
+    setUser =' '
+    setEmail =' '
+    setPassword =' '
   }
   return (
     <section>
@@ -30,8 +34,8 @@ const AddItems = () => {
       <label htmlFor='email'>Email: </label>
       <input type='email' name='email' value={email} onChange={(e) => setEmail(e.target.value)}required/><br/>
 
-      <label htmlFor='address'>Address: </label>
-      <input type='text' name='address' value={address} onChange={(e) => setAddress(e.target.value)}required/><br/>
+      {/* <label htmlFor='address'>Address: </label>
+      <input type='text' name='address' value={address} onChange={(e) => setAddress(e.target.value)}required/><br/> */}
 
       <input type='submit' value="create account"/>
 
