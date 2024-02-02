@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-
+import axios from 'axios'
 
 const AddItems = () => {
-  const [item, setItem] = useState({})
+  const [items, setItems] = useState({})
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-  const [address, setAddress]= useState('')
+  // const [address, setAddress]= useState('')
 
   
 
@@ -15,12 +15,13 @@ const AddItems = () => {
   const handleSubmit = (e) =>{
     e.preventDefault();
 
-    setItem(values =>({...values, "user_name": user, "password": password, "email": email }));
+    setItems(values =>({...values, "user_name": user, "password": password, "email": email }));
     // console.log({"user_id": user, "password": password, "email": email})
-    console.log(item)
-    setUser =' '
-    setEmail =' '
-    setPassword =' '
+    console.log(items)
+    axios.post('http://52.86.154.61:8888/users', items);
+    // setUser =' '
+    // setEmail =' '
+    // setPassword =' '
   }
   return (
     <section>
