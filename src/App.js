@@ -16,6 +16,7 @@ function App() {
         <Route path="/" element={<Navbar/>}>
           <Route index element={<Items/>}/>
           <Route path="additems" element={<AddItems/>}/>
+          <Route path='items' element={<Items/>}/>
           
         </Route>
       </Routes>
