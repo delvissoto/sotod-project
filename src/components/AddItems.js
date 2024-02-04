@@ -27,7 +27,7 @@ const AddItems = () => {
       console.log(items)
       navigate('/');
     } catch (err) {
-      console.error('Error submitting form:', err);
+      console.log('Error submitting form:', err);
       
     }
   };
