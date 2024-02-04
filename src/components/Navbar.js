@@ -5,16 +5,17 @@ import "../App.css"
 const Navbar = () => {
   return (
     <>
-    <nav>
-        <ul>
+    <nav >
+        <ul className='navbar'>
             <li>
                 <Link to="/items">Auctions</Link>
             </li>
+           
             <li>
-                <Link>My Auctions</Link>
+                <Link to='/adduser'>Log in / Register </Link>
             </li>
             <li>
-                <Link to='/additems'>Add Items</Link>
+                <Link to='/additem'>Add item </Link>
             </li>
         </ul>
     </nav>

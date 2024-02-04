@@ -1,9 +1,11 @@
 
 
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Items from './components/Items';
+import AddUser from './components/AddUser';
+import UpdateItems from './components/UpdateItems';
 import AddItems from './components/AddItems';
 
 function App() {
@@ -15,8 +17,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Navbar/>}>
           <Route index element={<Items/>}/>
-          <Route path="additems" element={<AddItems/>}/>
+          <Route path="adduser" element={<AddUser/>}/>
           <Route path='items' element={<Items/>}/>
+          <Route path ='updateitems/:item_id' element={<UpdateItems/>}/>
+          <Route path='additem' element={<AddItems/>}/>
           
         </Route>
       </Routes>
