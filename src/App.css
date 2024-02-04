@@ -1,3 +1,87 @@
-*{
+
+  @import url('https://fonts.googleapis.com/css2?family=Lacquer&family=Orbitron&display=swap');
+#freedom{
+  font-family: 'Lacquer', system-ui;
+  font-size: 40px;
+  font-weight: 300;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  padding-top: 75px;
+}
+.item_form{
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+align-items: center;
+
+
+}
+.item_form h1{
+  font-family: 'Lacquer', system-ui;
+}
+.labels{
+  font-family: 'Lacquer', system-ui;
+  background-color: #cdb4db;
+  width: 400px;
+  border: 1px solid #cdb4db;
+  border-radius: 30%;
+  
+}
+.additemsinput{
+  width: 500px;
+  height: 30px;
+  border: 1px solid grey;
+}
+
+
+#description{
+  height: 100px;
+  
+}
+.submitbutton{
+  width: 400px;
+  background-color: #a2d2ff;
+  border: 1px solid #a2d2ff;
+  border-radius: 30%;
+  font-family: 'Lacquer', system-ui;
+}
+/* NAVBAR */
+.navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
   text-align: center;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #ffc8dd;
+  opacity: 0.8;
+  height: 65px;
+
+}
+
+.navbar ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 600px;
+  
+}
+.navbar ul li{
+  list-style: none;
+
+}
+ .Links{
+  text-decoration: none;
+  color: black;
+
+}
+.Links:hover{
+  color:#5ba5eb;
+  opacity: 0.9;
 }
