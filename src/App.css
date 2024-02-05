@@ -1,3 +1,184 @@
-.App {
+
+  @import url('https://fonts.googleapis.com/css2?family=Lacquer&family=Orbitron&display=swap');
+#freedom{
+  font-family: 'Lacquer', system-ui;
+  font-size: 40px;
+  font-weight: 300;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  padding-top: 75px;
+}
+.item_form{
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+align-items: center;
+
+
+}
+.item_form h1{
+  font-family: 'Lacquer', system-ui;
+}
+.labels{
+  font-family: 'Lacquer', system-ui;
+  background-color: #cdb4db;
+  width: 400px;
+  border: 1px solid #cdb4db;
+  border-radius: 30%;
+  
+}
+.additemsinput{
+  width: 500px;
+  height: 25px;
+  border: 1px solid grey;
+}
+
+
+#description{
+  height: 100px;
+  
+}
+.submitbutton{
+  width: 400px;
+  background-color: #a2d2ff;
+  border: 1px solid #a2d2ff;
+  border-radius: 30%;
+  font-family: 'Lacquer', system-ui;
+}
+/* NAVBAR */
+.navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
   text-align: center;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #ffc8dd;
+  opacity: 0.8;
+  height: 65px;
+
+}
+
+.navbar ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 600px;
+  
+}
+.navbar ul li{
+  list-style: none;
+
+}
+ .Links{
+  text-decoration: none;
+  color: black;
+
+}
+.Links:hover{
+  color:#5ba5eb;
+  opacity: 0.9;
+}
+
+/* SIGN IN / SIGN OUT */
+
+.Sign_up_section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.Sign_up_div{
+  border: 2px solid #5ba5eb;
+
+  height: 500px;
+  width: 400px;
+  border-radius: 10%;
+}
+
+.sign_up{
+  width: 300px;
+  height: 30px;
+  border: 2px solid lightgray;;
+  margin-bottom: 10px;
+ 
+  border-radius: 10%;
+}
+#signupsubmit{
+  width: 250px;
+}
+.Sign_up_section form p{
+  font-size: 10px;
+}
+
+/* ITEMS  */
+.items_areas{
+  width: 100%;
+  margin-left: 5px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+}
+
+.item_card{
+display: flex;
+flex-direction: column; 
+width: 425px;
+border: 2px solid black;
+justify-content: center;
+margin-bottom: 25px;
+max-width: 700px;
+
+
+}
+.item_card h3{
+  text-align: center;
+  margin: 0;
+}
+.item_image{
+  width:100%;
+  
+  
+}
+.Item_info{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.card-descriptions{
+  width: 50%;
+}
+.card-descriptions li{
+  list-style: none;
+  flex-direction: column;
+  flex-wrap: wrap;
+  
+}
+.card-h3{
+  font-family: 'Lacquer', system-ui;
+}
+.button_area{
+  display: flex;
+  justify-content:space-around;
+}
+.item_button{
+  width: 100px;
+  text-align:center;
+  height: 30px;
+  border: 1px solid grey;
+  background-color: #5ba5eb;
+  color: white;
+  border-radius: 9%;
+  
+  
 }

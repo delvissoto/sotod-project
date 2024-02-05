@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-const initialSate = {
+const initialState = {
     somethings:[], 
     status:"idle", 
     error:null
