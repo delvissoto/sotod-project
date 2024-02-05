@@ -7,6 +7,7 @@ import Items from './components/Items';
 import AddUser from './components/AddUser';
 import UpdateItems from './components/UpdateItems';
 import AddItems from './components/AddItems';
+import LogIn from './components/LogIn';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path='items' element={<Items/>}/>
           <Route path ='updateitems/:item_id' element={<UpdateItems/>}/>
           <Route path='additem' element={<AddItems/>}/>
+          <Route path='login' element={<LogIn/>}/>
           
         </Route>
       </Routes>
