@@ -29,19 +29,26 @@ const AddUser = () => {
   };
 
   return (
-    <section>
+    <section className='Sign_up_section'>
+      <div className='Sign_up_div'>
+        <div>
+          <h2>Sign Up</h2>
+          <p>It's quick and easy.</p>
+        </div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='user_name'>User: </label>
-        <input type='text' id='user_name' name='user_name' value={user.user_name} onChange={handleChange} required /><br />
+        
+        <input className='sign_up' placeholder='Usernname' type='text' id='user_name' name='user_name' value={user.user_name} onChange={handleChange} required /><br />
 
-        <label htmlFor='password'>Password: </label>
-        <input type='password' id='password' name='password' value={user.password} onChange={handleChange} required /><br />
+       
+        <input className='sign_up'placeholder='Password' type='password' id='password' name='password' value={user.password} onChange={handleChange} required /><br />
 
-        <label htmlFor='email'>Email: </label>
-        <input type='email' id='email' name='email' value={user.email} onChange={handleChange} required /><br />
+        
+        <input className='sign_up' placeholder='Email' type='email' id='email' name='email' value={user.email} onChange={handleChange} required /><br />
 
-        <input type='submit' value="Create Account" />
+        <p>By clicking Sign Up, you agree to our Terms, Privacy Policy.<br/> You may receive email Notifications from us.</p>
+        <input id="signupsubmit"  type='submit' className='submitbutton' value="Sign Up" />
       </form>
+      </div>
     </section>
   );
 };
