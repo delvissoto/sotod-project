@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AddUser = () => {
   const initialUserState = {
@@ -46,6 +46,7 @@ const AddUser = () => {
         <input className='sign_up' placeholder='Email' type='email' id='email' name='email' value={user.email} onChange={handleChange} required /><br />
 
         <p>By clicking Sign Up, you agree to our Terms, Privacy Policy.<br/> You may receive email Notifications from us.</p>
+        <p>Have an account? <Link to="/login">Log In</Link> </p>
         <input id="signupsubmit"  type='submit' className='submitbutton' value="Sign Up" />
       </form>
       </div>
