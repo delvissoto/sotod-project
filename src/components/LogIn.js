@@ -5,27 +5,33 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const LogIn = () => {
     const initialUserState = {
-        user_name: "",
+        email: "",
         password: ""
       };
     
       const [user, setUser] = useState(initialUserState);
+      const [message, setMessage] = useState(null)
+      const [showPassword, setShowPassword] = useState(initialUserState.password)
       const navigate = useNavigate();
-    
+      axios.defaults.withCredentials = true;  
       const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
       };
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-          await axios.get("http://52.86.154.61:8080/users", user);
-          console.log(user)
-          navigate('/');
-        } catch (err) {
-          console.error(err);
+       
+          await axios.post("http://52.86.154.61:8080/users/login", user)
           
-        }
+          .then(res => {
+            if(res.data.Status === "Success") {
+              // navigate('/');
+            }else{
+              setMessage(res.data.Error)
+            }
+          })
+           .then(err => console.log(err))
+       
       };
     
       return (
@@ -37,11 +43,15 @@ const LogIn = () => {
             </div>
           <form onSubmit={handleSubmit}>
             
-            <input className='sign_up' placeholder='Usernname' type='text' id='user_name' name='user_name' value={user.user_name} onChange={handleChange} required /><br />
+            <input className='sign_up' placeholder='Email' type='email' id='email' name='email' value={user.email} onChange={handleChange} required /><br />
     
            
-            <input className='sign_up'placeholder='Password' type='password' id='password' name='password' value={user.password} onChange={handleChange} required /><br />
-    
+            <input className='sign_up'placeholder='Password'  type={showPassword ? 'text' : 'password'} id='password' name='password' value={user.password} onChange={handleChange} required />
+            <button type="button" onClick={() => setShowPassword(!showPassword)}>
+              Show Password
+            </button>
+            <br />
+              {message && <p>{message}</p>}
             <p>Don't have an account? <Link to="/adduser">Create Account </Link> </p>
            
             <input id="signupsubmit"  type='submit' className='submitbutton' value="Log In" />
