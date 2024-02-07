@@ -16,13 +16,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path='/login' element={<LogIn/>}/>
+      <Route path="/adduser" element={<AddUser/>}/>
         <Route path="/" element={<Navbar/>}>
           <Route index element={<Items/>}/>
           <Route path="adduser" element={<AddUser/>}/>
           <Route path='items' element={<Items/>}/>
           <Route path ='updateitems/:item_id' element={<UpdateItems/>}/>
           <Route path='additem' element={<AddItems/>}/>
-          <Route path='login' element={<LogIn/>}/>
+         
           
         </Route>
       </Routes>

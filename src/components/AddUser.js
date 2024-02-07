@@ -18,14 +18,17 @@ const AddUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post("http://52.86.154.61:8080/users", user);
-      console.log(user)
-      navigate('/');
-    } catch (err) {
-      console.error('Error submitting form:', err);
-      
-    }
+   
+      await axios.post("http://52.86.154.61:8080/users/signup", user)
+                 .then(res => {
+                  if(res.data.Status === "Success") {
+                    navigate('/login');
+                  }else{
+                    alert("Error")
+                  }
+                })
+                 .then(err => console.log(err))
+                 
   };
 
   return (
