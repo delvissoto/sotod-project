@@ -12,8 +12,11 @@ const LogIn = () => {
       const [user, setUser] = useState(initialUserState);
       const [message, setMessage] = useState(null)
       const [showPassword, setShowPassword] = useState(initialUserState.password)
+
       const navigate = useNavigate();
       axios.defaults.withCredentials = true;  
+
+
       const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
       };
@@ -24,10 +27,10 @@ const LogIn = () => {
           await axios.post("http://52.86.154.61:8080/users/login", user)
           
           .then(res => {
-            if(res.data.Status === "Success") {
-              // navigate('/');
+            if(res.data.message === "Wrong username/password combination!") {
+              setMessage(res.data.message)
             }else{
-              setMessage(res.data.Error)
+              navigate('/')
             }
           })
            .then(err => console.log(err))

@@ -5,24 +5,19 @@ import axios from 'axios'
 
 
 const Navbar = () => {
-    const [auth, setAuth] = useState(true)
-    const [message, setMessage]= useState('')
+    const [auth, setAuth] = useState(false)
+    // const [message, setMessage]= useState('')
     const [name, setName] = useState('')
     
 
     useEffect(() =>{
-        axios.get("http://52.86.154.61:8080/users",)
-                 .then(res => {
-                  console.log('API Response:', res.data)
-                  if(res.data.Status === "Success") {
-                    setAuth(true);
-                    setName(res.data.id)
-                  }else{
-                    setAuth(false);
-                    setMessage(res.data.Error)
-                  }
-                })
-                 .catch(err => console.log(err))
+        axios.get("http://52.86.154.61:8080/users",).then((response)=>{
+          if(response.data.loggedIn == true){
+            setAuth(true)
+            setName(response.data.user[0].user_name)
+          }
+        })
+                
                 
     }, [])
 
@@ -41,7 +36,7 @@ const Navbar = () => {
                 <Link className='Links'  to="/items">Auctions</Link>
             </li>
            
-            {name !== '' && <li>{name}</li>}
+            <li>{name}</li>
             <li>
                 <Link className='Links' to='/additem'>Add item </Link>
             </li>
@@ -54,7 +49,7 @@ const Navbar = () => {
     <div>
     <p>Session Expired!</p>
     
-    {message && <p>{message}</p>}
+    {/* {message && <p>{message}</p>} */}
     <Link to="/login">Log in</Link>
     </div>
         }   
