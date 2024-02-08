@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import "../App.css"
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 
 
 const Navbar = () => {
     const [auth, setAuth] = useState(false)
     // const [message, setMessage]= useState('')
     const [name, setName] = useState('')
+
+    const navigate = useNavigate()
     axios.defaults.withCredentials = true;  
 
     useEffect(() =>{
@@ -24,6 +28,17 @@ const Navbar = () => {
                 
     }, [])
 
+    const handleLogout = () =>{
+      // axios.get("http://52.86.154.61:8080/users/logout")
+      // .then(res =>{
+      //   if(res.data.message === "success"){
+      //     navigate('/login')
+      //   } else {
+      //     alert("error")
+      //   }
+      // })
+    }
+
 
   return (
     <>
@@ -38,11 +53,11 @@ const Navbar = () => {
             <li>
                 <Link className='Links'  to="/items">Auctions</Link>
             </li>
-           
-            <li>{name}</li>
             <li>
                 <Link className='Links' to='/additem'>Add item </Link>
             </li>
+            <li>{name}</li>
+            <li ><button onClick={handleLogout}>Logout</button></li>
         </ul>
         
     </nav>
