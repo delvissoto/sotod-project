@@ -4,29 +4,23 @@ const bcrypt = require('bcrypt')
 const router  = express.Router()
 const db = require('../db')
 const cookieParser = require('cookie-parser')
+const session  = require("express-session")
 
 salt = 10;
 
 
 
-const verifyUser = (req, res, next )=>{
-    const token = req.cookies.token;
-    if(!token){
-        return res.json({Error:"Not logged in"});
-    }else{
-        jwt.verify(token, "secret_key", (err, decoded) =>{
-            if(err){
-            return res.json({Error: 'Token is not right'});
-            }else{
-                 req.user= decoded.user;
-                next()
-            }  
-            
-        })
-    }
-}
-router.get('/', verifyUser, (req, res) =>{
-    return res.json({Status: "success", user: req.user})
+
+router.get('/', (req, res) =>{
+   if (req.session.user){
+    res.send({loggedIn: true, user: req.session.user})
+   } else {
+        res.send({loggedIn:false})
+   }
+})
+
+router.get('/logout', (res, req) =>{
+   
 })
 // router.get('/:user_id', (req, res) => {
 //     res.send(`Get user with ID ${req.params.user_id}`)
@@ -62,32 +56,28 @@ router.post("/signup", (req, res)=>{
     
 })
 router.post("/login", (req, res)=>{
-    const sql = 'SELECT * FROM users WHERE email = ?';
-    db.query(sql, [req.body.email], (err, data) =>{
-        if(err) return res.json({Error:'Login Server Error'});
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const sql = "SELECT * FROM users WHERE email = ?";
+
+    db.query(sql, email, (err, data) =>{
+
+        if(err) return res.json({Error: err}); //error fetching 
+
         if(data.length > 0){
-            bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) =>{
-                if(err) return res.json({Error:"Password cant be read"})
-                if(response) {
-                        
-                    const user = data[0].user_id
-        
-                    const token = jwt.sign({user: data[0]}, "secret_key", {expiresIn:"1d"});
-
-                    console.log('User:', user.user_id);
-                    console.log('Token:', token);
-
-                 
-
-                    res.cookie('token', token);
-
-                    return res.json({Status:"Success"});
+            bcrypt.compare(password, data[0].password, (err, response) =>{
+                if(response){
+                    req.session.user = data
+                    console.log(req.session.user)
+                    res.send(data);
                 }else{
-                    return res.json({Error:" Incorrect Email or Password"})
+                    res.send({message:"Wrong username/password combination!"})
                 }
+
             })
         }else{
-            return res.json({Error:'Email does not exist!'});
+            res.send({message:"User does not exist"})
         }
     })
 })
