@@ -47,16 +47,17 @@ const Navbar = () => {
         <div>
     <nav className='navbar'>
         <div className='Logo'>
-        <Link id='freedom' className='Links'  to="/items" >Freedom Auction</Link>
+        <Link id='freedom' className='Links'  to="/" >Freedom Auction</Link>
         </div>
         <ul className='navlinks'>
             <li>
-                <Link className='Links'  to="/items">Auctions</Link>
+                <Link className='Links'  to="/">Auctions</Link>
             </li>
             <li>
                 <Link className='Links' to='/additem'>Add item </Link>
             </li>
-            <li>{name}</li>
+            <li><Link className='Links' to="/profile" >{name}</Link></li>
+
             <li ><button onClick={handleLogout}>Logout</button></li>
         </ul>
         

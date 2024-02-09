@@ -8,6 +8,7 @@ import AddUser from './components/AddUser';
 import UpdateItems from './components/UpdateItems';
 import AddItems from './components/AddItems';
 import LogIn from './components/LogIn';
+import UserProfile from './components/UserProfile';
 
 function App() {
 
@@ -21,10 +22,10 @@ function App() {
         <Route path="/" element={<Navbar/>}>
           <Route index element={<Items/>}/>
           <Route path="adduser" element={<AddUser/>}/>
-          <Route path='items' element={<Items/>}/>
+          <Route path='/' element={<Items/>}/>
           <Route path ='updateitems/:item_id' element={<UpdateItems/>}/>
           <Route path='additem' element={<AddItems/>}/>
-         
+         <Route path='profile' element={<UserProfile/>}/>
           
         </Route>
       </Routes>
