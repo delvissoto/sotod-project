@@ -32,6 +32,10 @@ app.use(session({
 app.get('/', (req, res)=> {
     return res.json('From Backendside');
 })
+app.get('/', (res, req) =>{
+    res.cookie('', '', {expires: new Date(1), path: '/' });
+   return res.json({Message:"Success"})
+})
 
 
 

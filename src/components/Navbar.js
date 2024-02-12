@@ -10,6 +10,7 @@ const Navbar = () => {
     const [auth, setAuth] = useState(false)
     // const [message, setMessage]= useState('')
     const [name, setName] = useState('')
+    const [loading, setLoading]= useState(true)
 
     const navigate = useNavigate()
     axios.defaults.withCredentials = true;  
@@ -19,33 +20,41 @@ const Navbar = () => {
           if(response.data.loggedIn == true){
             setAuth(true)
             setName(response.data.user[0].user_name)
+        
           }
           else{
             setAuth(false)
+            navigate('/login')
           }
         })
                 
                 
     }, [])
 
-    const handleLogout = () =>{
-      // axios.get("http://52.86.154.61:8080/users/logout")
-      // .then(res =>{
-      //   if(res.data.message === "success"){
-      //     navigate('/login')
-      //   } else {
-      //     alert("error")
-      //   }
-      // })
-    }
+    const handleLogout = async () => {
+      await axios.get("http://52.86.154.61:8080/users/logout")
+        .then(res => {
+          if (res.data.Message === "Success") {  
+            navigate('/login');
+          } else {
+            alert("Error");
+          }
+        })
+        .catch(error => {
+          console.error("Logout error:", error);
+          alert("Error during logout");
+        });
+    };
+    
 
 
   return (
     <>
     {
         auth ? 
+        
         <div>
-    <nav className='navbar'>
+        <nav className='navbar'>
         <div className='Logo'>
         <Link id='freedom' className='Links'  to="/" >Freedom Auction</Link>
         </div>
@@ -66,10 +75,9 @@ const Navbar = () => {
     </div>
     : 
     <div>
-    <p>Session Expired!</p>
+    <p>loading...</p>
     
-    {/* {message && <p>{message}</p>} */}
-    <Link to="/login">Log in</Link>
+    
     </div>
         }   
     </>

@@ -19,9 +19,11 @@ router.get('/', (req, res) =>{
    }
 })
 
-router.get('/logout', (res, req) =>{
-   
-})
+router.get('/logout', (req, res) => {
+    res.clearCookie('userId', { path: '/' });
+    req.session.destroy();  // destroy the session
+    return res.json({ Message: "Success" });
+});
 // router.get('/:user_id', (req, res) => {
 //     res.send(`Get user with ID ${req.params.user_id}`)
 // })
