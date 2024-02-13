@@ -3,6 +3,10 @@ import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const UpdateItems = () => {
+
+  
+
+
   const initialItemsState = {
     item_name: "",
     description: "",

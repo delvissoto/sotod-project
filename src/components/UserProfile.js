@@ -15,8 +15,8 @@ const UserProfile = () => {
         axios.get("http://52.86.154.61:8080/users",).then((response)=>{
           if(response.data.loggedIn == true){
             setAuth(true)
-            setName(response.data.user[0].user_name)
-            setEmail(response.data.user[0].email)
+            setName(response.data.decodedToken.userName);
+            setEmail(response.data.decodedToken.userEmail)
             
           }
           else{
