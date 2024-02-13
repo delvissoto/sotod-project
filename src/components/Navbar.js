@@ -3,10 +3,13 @@ import { Link, Outlet } from 'react-router-dom'
 import "../App.css"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import cookies from 'js-cookie'
 
 
 
 const Navbar = () => {
+  
+      const [user, setUser] = useState(null);
     const [auth, setAuth] = useState(false)
     // const [message, setMessage]= useState('')
     const [name, setName] = useState('')
@@ -19,7 +22,7 @@ const Navbar = () => {
         axios.get("http://52.86.154.61:8080/users",).then((response)=>{
           if(response.data.loggedIn == true){
             setAuth(true)
-            setName(response.data.user[0].user_name)
+            setName(response.data.decodedToken.userName);
         
           }
           else{

@@ -5,22 +5,33 @@ const router  = express.Router()
 const db = require('../db')
 const cookieParser = require('cookie-parser')
 const session  = require("express-session")
+const { createToken } = require('./jwt')
 
 salt = 10;
 
 
 
 
-router.get('/', (req, res) =>{
-   if (req.session.user){
-    res.send({loggedIn: true, user: req.session.user})
-   } else {
-        res.send({loggedIn:false})
-   }
-})
+router.get('/', (req, res) => {
+    const token = req.cookies.jwt;
+  
+    if (token) {
+      
+      jwt.verify(token, 'secret_key', (err, decodedToken) => {
+        if (err) {
+          res.send({ loggedIn: false });
+        } else {
+             ;
+          res.send({ loggedIn: true, decodedToken});
+        }
+      });
+    } else {
+      res.send({ loggedIn: false });
+    }
+  });
 
 router.get('/logout', (req, res) => {
-    res.clearCookie('userId', { path: '/' });
+    res.clearCookie('jwt', { path: '/' });
     req.session.destroy();  // destroy the session
     return res.json({ Message: "Success" });
 });
@@ -70,14 +81,23 @@ router.post("/login", (req, res)=>{
         if(data.length > 0){
             bcrypt.compare(password, data[0].password, (err, response) =>{
                 if(response){
-                    req.session.user = data
-                    console.log(req.session.user)
-                    res.send(data);
+                    const userId = data[0].user_id;
+                    const userName = data[0].user_name
+                    const userEmail = data[0].email
+
+                    console.log(userId, userName, userEmail)
+
+                    const token = createToken(userId, userName, userEmail );
+                    console.log(token)
+                    
+                    res.cookie('jwt', token,{ httpOnly: true, secure: false });
+                    res.json({message:'Login Successful'})
                 }else{
                     res.send({message:"Wrong username/password combination!"})
                 }
 
             })
+            
         }else{
             res.send({message:"User does not exist"})
         }

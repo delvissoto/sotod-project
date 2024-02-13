@@ -4,9 +4,18 @@ import { Link } from 'react-router-dom'
 
 const Items = () => {
     const [items, setItems] = useState([])
+    const [name, setName] = useState('')
+    const [user_Id, setUser_Id] = useState(0)
 
     useEffect(() =>{
         const fetchAllItems = async ()=>{
+            axios.get("http://52.86.154.61:8080/users",).then((response)=>{
+      
+        setName(response.data.decodedToken.userName);
+        const userId = response.data.decodedToken.userId;
+        setUser_Id(userId);
+      
+         })
             try{
                 const res = await axios.get("http://52.86.154.61:8080/items")
                  setItems(res.data)
@@ -19,7 +28,9 @@ const Items = () => {
     }, [])
 
     const handleDelete = async (item_id) =>{
-        try{
+        
+        try{  
+          
             await axios.delete(`http://52.86.154.61:8080/items/${item_id}`)
             setItems(prevItems => prevItems.filter(item => item.item_id !== item_id));
    
@@ -28,7 +39,7 @@ const Items = () => {
             console.log("Error deleting item: ", err)
         }
     }
-
+    
 
 
   return (
@@ -58,13 +69,15 @@ const Items = () => {
                 <li>{item.features_4}</li>
             </ul>
             </div>
-            <div className='button_area'>
-            <button  className='item_button' onClick={() => handleDelete(item.item_id)}>Delete</button>
-               
-                <Link to={`/updateitems/${item.item_id}`} >
-                <button className='item_button'>Update</button>
-                </Link>
-            </div>
+            {user_Id === item.User_id ? (
+        <div className='button_area'>
+            <button className='item_button' onClick={() => handleDelete(item.item_id)}>Delete</button>
+            <Link to={`/updateitems/${item.item_id}`}>
+            <button className='item_button'>Update</button>
+            </Link>
+        </div>
+        ) : null}
+            
             </div>
         ))}
     </div>
